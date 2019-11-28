@@ -6,6 +6,7 @@ namespace ManagementApp.Data
 {
     public class PurchaseRequest
     {
+        public int Id { get; set; }
         public int PurchaseRequestID { get; set; }
         public int StaffID { get; set; }
         public int VendorID { get; set; }

@@ -6,6 +6,7 @@ namespace ManagementApp.Data
 {
     public class StaffAccount
     {
+        public int Id { get; set; }
         public int StaffID { get; set; }
         public string Name { get; set; }
         public int PermissionID { get; set; }
