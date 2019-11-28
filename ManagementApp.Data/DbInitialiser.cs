@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ManagementApp.Data
 {
-    public static class DBInitialiser
+    public static class DbInitialiser
     {
         public static async Task SeedTestData(Db context,
                                              IServiceProvider services)
