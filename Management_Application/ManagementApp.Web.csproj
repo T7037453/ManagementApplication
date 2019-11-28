@@ -13,6 +13,11 @@
 
 
   <ItemGroup>
+    <Folder Include="Controllers\api\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
     <ProjectReference Include="..\ManagementApp.Data\ManagementApp.Data.csproj" />
   </ItemGroup>
 

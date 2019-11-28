@@ -16,6 +16,6 @@ namespace ManagementApp.Web.Models
         public int ProductQty { get; set; }
         public int PaymentDetailsID { get; set; }
         // Maybe have ability to add card details, then select them from drop down when approving.
-        public PaymentDetails Payment { get; set; }
+        public PaymentDetail Payment { get; set; }
         }
 }

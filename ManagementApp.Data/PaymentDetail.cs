@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ManagementApp.Data
 {
-    public class PaymentDetails
+    public class PaymentDetail
     {
         public int PaymentDetailsID { get; set; }
         public string AccountNumber { get; set; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ManagementApp.Data
 {
-    class StaffAccount
+    public class StaffAccount
     {
         public int StaffID { get; set; }
         public string Name { get; set; }
