@@ -25,7 +25,7 @@ namespace ManagementApp.Data
 
             var StaffAccounts = new List<StaffAccount>
             {
-                new StaffAccount { StaffID = 42, Name = "Jordan", PermissionID = 2}
+                new StaffAccount { StaffID = 42, Name = "Jordan", PermissionID = 1}
             };
             StaffAccounts.ForEach(a => context.StaffAccounts.Add(a));
             try { await context.SaveChangesAsync();
@@ -42,7 +42,8 @@ namespace ManagementApp.Data
 
             var PurchaseRequests = new List<PurchaseRequest>
             {
-                new PurchaseRequest {PurchaseRequestID = 1, StaffID = 42, ProductName = "Test Product", ProductPrice = 20, ProductQty = 5}
+                new PurchaseRequest {PurchaseRequestID = 1, StaffID = 42, VendorID = 1,
+                    ProductName = "Test Product", ProductPrice = 20, ProductQty = 5, PaymentDetailsID =4}
             };
             PurchaseRequests.ForEach(r => context.PurchaseRequests.Add(r));
             await context.SaveChangesAsync();
