@@ -9,22 +9,23 @@ using ManagementApp.Data;
 
 namespace ManagementApp.Web.Controllers
 {
-    public class PaymentDetailsController : Controller
+    public class StaffAccountsController : Controller
     {
         private readonly Db _context;
 
-        public PaymentDetailsController(Db context)
+        public StaffAccountsController(Db context)
         {
             _context = context;
         }
 
-        // GET: PaymentDetails
+        // GET: StaffAccounts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PaymentDetails.ToListAsync());
+            var db = _context.StaffAccounts.Include(s => s.Permissions);
+            return View(await db.ToListAsync());
         }
 
-        // GET: PaymentDetails/Details/5
+        // GET: StaffAccounts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +33,42 @@ namespace ManagementApp.Web.Controllers
                 return NotFound();
             }
 
-            var paymentDetail = await _context.PaymentDetails
+            var staffAccount = await _context.StaffAccounts
+                .Include(s => s.Permissions)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (paymentDetail == null)
+            if (staffAccount == null)
             {
                 return NotFound();
             }
 
-            return View(paymentDetail);
+            return View(staffAccount);
         }
 
-        // GET: PaymentDetails/Create
+        // GET: StaffAccounts/Create
         public IActionResult Create()
         {
+            ViewData["PermissionID"] = new SelectList(_context.Permissions, "Id", "Name");
             return View();
         }
 
-        // POST: PaymentDetails/Create
+        // POST: StaffAccounts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PaymentDetailsID,AccountNumber,SortCode")] PaymentDetail paymentDetail)
+        public async Task<IActionResult> Create([Bind("Id,StaffID,Name,PermissionID")] StaffAccount staffAccount)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(paymentDetail);
+                _context.Add(staffAccount);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(paymentDetail);
+            ViewData["PermissionID"] = new SelectList(_context.Permissions, "Id", "Name", staffAccount.PermissionID);
+            return View(staffAccount);
         }
 
-        // GET: PaymentDetails/Edit/5
+        // GET: StaffAccounts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +76,23 @@ namespace ManagementApp.Web.Controllers
                 return NotFound();
             }
 
-            var paymentDetail = await _context.PaymentDetails.FindAsync(id);
-            if (paymentDetail == null)
+            var staffAccount = await _context.StaffAccounts.FindAsync(id);
+            if (staffAccount == null)
             {
                 return NotFound();
             }
-            return View(paymentDetail);
+            ViewData["PermissionID"] = new SelectList(_context.Permissions, "Id", "Name", staffAccount.PermissionID);
+            return View(staffAccount);
         }
 
-        // POST: PaymentDetails/Edit/5
+        // POST: StaffAccounts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PaymentDetailsID,AccountNumber,SortCode")] PaymentDetail paymentDetail)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,StaffID,Name,PermissionID")] StaffAccount staffAccount)
         {
-            if (id != paymentDetail.Id)
+            if (id != staffAccount.Id)
             {
                 return NotFound();
             }
@@ -96,12 +101,12 @@ namespace ManagementApp.Web.Controllers
             {
                 try
                 {
-                    _context.Update(paymentDetail);
+                    _context.Update(staffAccount);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PaymentDetailExists(paymentDetail.Id))
+                    if (!StaffAccountExists(staffAccount.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +117,11 @@ namespace ManagementApp.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(paymentDetail);
+            ViewData["PermissionID"] = new SelectList(_context.Permissions, "Id", "Name", staffAccount.PermissionID);
+            return View(staffAccount);
         }
 
-        // GET: PaymentDetails/Delete/5
+        // GET: StaffAccounts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +129,31 @@ namespace ManagementApp.Web.Controllers
                 return NotFound();
             }
 
-            var paymentDetail = await _context.PaymentDetails
+            var staffAccount = await _context.StaffAccounts
+                .Include(s => s.Permissions)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (paymentDetail == null)
+            if (staffAccount == null)
             {
                 return NotFound();
             }
 
-            return View(paymentDetail);
+            return View(staffAccount);
         }
 
-        // POST: PaymentDetails/Delete/5
+        // POST: StaffAccounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var paymentDetail = await _context.PaymentDetails.FindAsync(id);
-            _context.PaymentDetails.Remove(paymentDetail);
+            var staffAccount = await _context.StaffAccounts.FindAsync(id);
+            _context.StaffAccounts.Remove(staffAccount);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PaymentDetailExists(int id)
+        private bool StaffAccountExists(int id)
         {
-            return _context.PaymentDetails.Any(e => e.Id == id);
+            return _context.StaffAccounts.Any(e => e.Id == id);
         }
     }
 }

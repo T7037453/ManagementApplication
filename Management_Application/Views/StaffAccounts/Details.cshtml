@@ -1,4 +1,4 @@
-﻿@model ManagementApp.Data.PaymentDetail
+﻿@model ManagementApp.Data.StaffAccount
 
 @{
     ViewData["Title"] = "Details";
@@ -7,26 +7,26 @@
 <h1>Details</h1>
 
 <div>
-    <h4>PaymentDetail</h4>
+    <h4>StaffAccount</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PaymentDetailsID)
+            @Html.DisplayNameFor(model => model.StaffID)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PaymentDetailsID)
+            @Html.DisplayFor(model => model.StaffID)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AccountNumber)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AccountNumber)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SortCode)
+            @Html.DisplayNameFor(model => model.Permissions)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SortCode)
+            @Html.DisplayFor(model => model.Permissions.Name)
         </dd>
     </dl>
 </div>

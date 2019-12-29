@@ -20,7 +20,7 @@ namespace Management_Application.Controllers
             return View();
         }
 
-        public IActionResult PurchaseRequests()
+        public IActionResult StaffAccounts()
         {
             return View();
         }
